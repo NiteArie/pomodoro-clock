@@ -8,7 +8,7 @@ The Pomodoro Technique is a time management method developed by Francesco Cirill
 
 * [X] User can see a timer for 25 minutes - the working session
 * [ ] After the working session is over, the User can see a timer for 5 minutes - the break session
-* [ ] User can start / pause, stop and reset the timers
+* [X] User can start / pause, stop and reset the timers
 
 ## Bonus Feature
 
