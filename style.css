@@ -72,8 +72,18 @@ body {
     box-shadow: inset 3px 2px 5px hsla(0, 0%, 0%, 1);
 }
 
+.container__clock__buttons__button:disabled {
+    cursor: not-allowed;
+    background-color: white;
+    color: black;
+}
+
 .container__clock__buttons__button:focus {
     outline: none;
+}
+
+.container__click__buttons__button--active {
+    box-shadow: inset 3px 2px 5px hsla(0, 0%, 0%, 1);
 }
 
 .container__clock__buttons__start {

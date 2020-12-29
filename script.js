@@ -21,17 +21,27 @@ const app = (() => {
 
     _startButton.addEventListener("click", event => {
         startTimer();
+        disableStartButton();
+        activeStartButton();
+        clearStopButton();
     })
 
     _stopButton.addEventListener("click", event => {
         clearInterval(_timerInterval);
+        enableStartButton();
+        clearStartButton();
+        activeStopButton();
     })
 
     _resetButton.addEventListener("click", event => {
+        clearInterval(_timerInterval);
         setTimeValue(25);
         setSecondValue(0);
         renderTimeDisplay();
         renderOptionTimeDisplay();
+        clearStartButton();
+        clearStopButton();
+        enableStartButton();
     })
 
     _incrementTimeButton.addEventListener("click", event => {
@@ -146,6 +156,30 @@ const app = (() => {
                 clearInterval(_timerInterval);
             }
         }, 1000);
+    }
+
+    function activeStartButton() {
+        _startButton.classList.add("container__click__buttons__button--active");
+    }
+
+    function clearStartButton() {
+        _startButton.classList.remove("container__click__buttons__button--active");
+    }
+
+    function disableStartButton() {
+        _startButton.disabled = true;
+    }
+
+    function enableStartButton() {
+        _startButton.disabled = false;
+    }
+
+    function activeStopButton() {
+        _stopButton.classList.add("container__click__buttons__button--active");
+    }
+
+    function clearStopButton() {
+        _stopButton.classList.remove("container__click__buttons__button--active");
     }
 
 
