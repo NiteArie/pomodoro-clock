@@ -155,6 +155,12 @@ body {
     outline: none;
 }
 
+.container__options__time button:disabled,
+.container__options__break button:disabled {
+    box-shadow: inset 1px 1px 2px hsl(0, 50%, 50%);
+    cursor: not-allowed;
+}
+
 .container__options__time__inc,
 .container__options__break__inc {
     background-image: url("assets/chevrons-up.svg");

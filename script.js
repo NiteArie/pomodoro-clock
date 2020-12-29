@@ -31,9 +31,16 @@ const app = (() => {
         } else {
             startBreakTimer();
         }
+
         disableStartButton();
         activeStartButton();
         clearStopButton();
+
+        disableIncrementTimeButton();
+        disableDecrementTimeButton();
+        disableIncrementBreakButton();
+        disableDecrementBreakButton();
+
     })
 
     _stopButton.addEventListener("click", event => {
@@ -42,6 +49,12 @@ const app = (() => {
         } else {
             clearInterval(_breakInterval);
         }
+
+        enableIncrementTimeButton();
+        enableDecrementTimeButton();
+        enableIncrementBreakButton();
+        enableDecrementBreakButton();
+
         enableStartButton();
         clearStartButton();
         activeStopButton();
@@ -53,10 +66,23 @@ const app = (() => {
         } else {
             clearInterval(_breakInterval);
         }
+
         setTimeValue(25);
         setSecondValue(0);
+        setBreakValue(5);
+
+        setCurrentOptionTime(_time);
+        setCurrentOptionBreak(_break);
+
         renderTimeDisplay();
         renderOptionTimeDisplay();
+        renderOptionBreakDisplay();
+
+        enableIncrementTimeButton();
+        enableDecrementTimeButton();
+        enableIncrementBreakButton();
+        enableDecrementBreakButton();
+
         clearStartButton();
         clearStopButton();
         enableStartButton();
@@ -65,7 +91,9 @@ const app = (() => {
     _incrementTimeButton.addEventListener("click", event => {
         incrementTimeByValue(1);
         validTime();
+
         setCurrentOptionTime(_time);
+
         renderTimeDisplay();
         renderOptionTimeDisplay();
     })
@@ -73,7 +101,9 @@ const app = (() => {
     _decrementTimeButton.addEventListener("click", event => {
         decrementTimeByValue(1);
         validTime();
+
         setCurrentOptionTime(_time);
+
         renderTimeDisplay();
         renderOptionTimeDisplay();
     })
@@ -81,16 +111,26 @@ const app = (() => {
     _incrementBreakButton.addEventListener("click", event => {
         incrementBreakByValue(1);
         validBreak();
+
         setCurrentOptionBreak(_break);
-        renderTimeDisplayWithBreak();
+        
+        if (!_timerState) {
+            renderTimeDisplayWithBreak();
+        }
+
         renderOptionBreakDisplay();
     })
 
     _decrementBreakButton.addEventListener("click", event => {
         decrementBreakByValue(1);
         validBreak();
+
         setCurrentOptionBreak(_break);
-        renderTimeDisplayWithBreak();
+
+        if (!_timerState) {
+            renderTimeDisplayWithBreak();
+        }
+
         renderOptionBreakDisplay();
     })
 
@@ -200,7 +240,6 @@ const app = (() => {
                 clearInterval(_timerInterval);
                 setSecondValue(0);
                 setBreakValue(_currentOptionBreak);
-                console.log(_break);
                 startBreakTimer();
             }
         }, 1000);
@@ -250,6 +289,35 @@ const app = (() => {
 
     function clearStopButton() {
         _stopButton.classList.remove("container__click__buttons__button--active");
+    }
+
+    function disableIncrementTimeButton() {
+        _incrementTimeButton.disabled = true;
+    }
+
+    function enableIncrementTimeButton() {
+        _incrementTimeButton.disabled = false;
+    }
+
+    function disableDecrementTimeButton() {
+        _decrementTimeButton.disabled = true;
+    }
+
+    function enableDecrementTimeButton() {
+        _decrementTimeButton.disabled = false;
+    }
+
+    function disableIncrementBreakButton() {
+        _incrementBreakButton.disabled = true;
+    }
+    function enableIncrementBreakButton() {
+        _incrementBreakButton.disabled = false;
+    }
+    function disableDecrementBreakButton() {
+        _decrementBreakButton.disabled = true;
+    }
+    function enableDecrementBreakButton() {
+        _decrementBreakButton.disabled = false;
     }
 
 
