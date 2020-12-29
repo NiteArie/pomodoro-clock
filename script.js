@@ -13,28 +13,46 @@ const app = (() => {
     let _break = 5;
     let _time = 25;
     let _second = 0;
+
+    let _currentOptionTime = _time;
+    let _currentOptionBreak = _break;
+
     let _timerInterval = null;
+    let _breakInterval = null;
+    let _timerState = true;
 
     renderTimeDisplay();
     renderOptionBreakDisplay();
     renderOptionTimeDisplay();
 
     _startButton.addEventListener("click", event => {
-        startTimer();
+        if (_timerState) {
+            startTimer();
+        } else {
+            startBreakTimer();
+        }
         disableStartButton();
         activeStartButton();
         clearStopButton();
     })
 
     _stopButton.addEventListener("click", event => {
-        clearInterval(_timerInterval);
+        if (_timerState) {
+            clearInterval(_timerInterval);
+        } else {
+            clearInterval(_breakInterval);
+        }
         enableStartButton();
         clearStartButton();
         activeStopButton();
     })
 
     _resetButton.addEventListener("click", event => {
-        clearInterval(_timerInterval);
+        if (_timerState) {
+            clearInterval(_timerInterval);
+        } else {
+            clearInterval(_breakInterval);
+        }
         setTimeValue(25);
         setSecondValue(0);
         renderTimeDisplay();
@@ -47,6 +65,7 @@ const app = (() => {
     _incrementTimeButton.addEventListener("click", event => {
         incrementTimeByValue(1);
         validTime();
+        setCurrentOptionTime(_time);
         renderTimeDisplay();
         renderOptionTimeDisplay();
     })
@@ -54,6 +73,7 @@ const app = (() => {
     _decrementTimeButton.addEventListener("click", event => {
         decrementTimeByValue(1);
         validTime();
+        setCurrentOptionTime(_time);
         renderTimeDisplay();
         renderOptionTimeDisplay();
     })
@@ -61,18 +81,25 @@ const app = (() => {
     _incrementBreakButton.addEventListener("click", event => {
         incrementBreakByValue(1);
         validBreak();
+        setCurrentOptionBreak(_break);
+        renderTimeDisplayWithBreak();
         renderOptionBreakDisplay();
     })
 
     _decrementBreakButton.addEventListener("click", event => {
         decrementBreakByValue(1);
         validBreak();
+        setCurrentOptionBreak(_break);
+        renderTimeDisplayWithBreak();
         renderOptionBreakDisplay();
     })
 
     function renderTimeDisplay() {
-        console.log(_time, _second);
         _timeDisplay.textContent = formatTimeAndSecond(_time, _second);
+    }
+
+    function renderTimeDisplayWithBreak() {
+        _timeDisplay.textContent = formatTimeAndSecond(_break, _second);
     }
 
     function renderOptionTimeDisplay() {
@@ -81,6 +108,14 @@ const app = (() => {
 
     function renderOptionBreakDisplay() {
         _optionBreakDisplay.textContent = `${_break} mins`;
+    }
+
+    function setCurrentOptionTime(value) {
+        _currentOptionTime = value;
+    }
+
+    function setCurrentOptionBreak(value) {
+        _currentOptionBreak = value;
     }
 
     function incrementTimeByValue(value) {
@@ -140,6 +175,14 @@ const app = (() => {
         );
     }
 
+    function activeTimerState() {
+        _timerState = true;
+    }
+
+    function activeBreakState() {
+        _timerState = false;
+    }
+
     function startTimer() {
         _timerInterval = setInterval(() => {
             if (_second === 0) {
@@ -152,9 +195,36 @@ const app = (() => {
 
             renderTimeDisplay();
 
-            if (_time === 0) {
+            if (_time === 0 && _second === 0) {
+                activeBreakState();
                 clearInterval(_timerInterval);
+                setSecondValue(0);
+                setBreakValue(_currentOptionBreak);
+                console.log(_break);
+                startBreakTimer();
             }
+        }, 1000);
+    }
+
+    function startBreakTimer() {
+        _breakInterval = setInterval(() => {
+            if (_second === 0) {
+                decrementBreakByValue(1);
+                setSecondValue(59);
+            } else {
+                decrementSecondByValue(1);
+            }
+
+            renderTimeDisplayWithBreak();
+
+            if (_break === 0 && _second === 0) {
+                activeTimerState();
+                clearInterval(_breakInterval);
+                setTimeValue(_currentOptionTime);
+                setSecondValue(0);
+                startTimer();
+            }
+
         }, 1000);
     }
 
