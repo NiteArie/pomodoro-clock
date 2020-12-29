@@ -116,6 +116,7 @@ body {
 .container__options__time__content,
 .container__options__break__content {
     display: block;
+    width: 60px;
     margin: 0 20px;
     font-weight: bold;
 }
