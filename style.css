@@ -1,0 +1,155 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    background-color: hsl(0, 5%, 5%);
+    color: white;
+}
+
+.title {
+    margin: 20px;
+    margin-top: 50px;
+    font-size: 36px;
+    text-align: center;
+    text-shadow: 2px 2px 1px hsla(210, 50%, 50%, 1);
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: white;
+    
+}
+
+.container__clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(0, 50%, 50%);
+    border-bottom-right-radius: 50%;
+}
+
+.container__clock__session {
+    color: white;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.container__clock__session__title {
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.container__clock__session__time {
+    font-size: 112px;
+    font-weight: bold;
+}
+
+.container__clock__buttons {
+    margin-top: 40px;
+}
+
+.container__clock__buttons__button {
+    margin-left: 10px;
+    padding: 15px 35px;
+    font-size: 18px;
+    text-align: center;
+    text-indent: 10px;
+    background-repeat: no-repeat;
+    background-size: 40% 40%;
+    background-position: 8px 15px;
+    border: none;
+    box-shadow: 3px 5px 3px hsla(0, 0%, 0%, 1), inset 2px 2px 5px hsl(0, 50%, 90%);
+    cursor: pointer;
+}
+
+.container__clock__buttons__button:active {
+    box-shadow: inset 3px 2px 5px hsla(0, 0%, 0%, 1);
+}
+
+.container__clock__buttons__button:focus {
+    outline: none;
+}
+
+.container__clock__buttons__start {
+    background-image: url("assets/play.svg");
+    
+}
+
+.container__clock__buttons__stop {
+    background-image: url("assets/pause.svg");
+}
+
+.container__clock__buttons__reset {
+    background-image: url("assets/refresh-cw.svg");
+}
+
+.container__options {
+    display: flex;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: black;
+}
+
+.container__options__time,
+.container__options__break {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.container__options__time__title,
+.container__options__break__title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.container__options__time__content,
+.container__options__break__content {
+    display: block;
+    margin: 0 20px;
+    font-weight: bold;
+}
+
+.container__options__time button,
+.container__options__break button {
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 1px 1px 3px hsl(0, 50%, 50%);
+    cursor: pointer;
+}
+
+.container__options__time button:active,
+.container__options__break button:active {
+    outline: none;
+    box-shadow: inset 1px 1px 2px hsl(0, 50%, 50%);
+}
+
+.container__options__time button:focus,
+.container__options__break button:focus {
+    outline: none;
+}
+
+.container__options__time__inc,
+.container__options__break__inc {
+    background-image: url("assets/chevrons-up.svg");
+}
+
+.container__options__time__dec,
+.container__options__break__dec {
+    background-image: url("assets/chevrons-down.svg");
+}

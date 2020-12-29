@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Clock</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="reset.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <h1 class="title">Pomodoro Clock</h1>
+    <div class="container">
+        <div class="container__clock">
+            <div class="container__clock__session">
+                <h2 class="container__clock__session__title">Session</h2>
+                <time class="container__clock__session__time">
+                    25:00
+                </time>
+                <div class="container__clock__buttons">
+                    <button class="container__clock__buttons__button container__clock__buttons__start">
+                        Start
+                    </button>
+                    <button class="container__clock__buttons__button container__clock__buttons__stop">
+                        Stop
+                    </button>
+                    <button class="container__clock__buttons__button container__clock__buttons__reset">
+                        Reset
+                    </button>    
+                </div>
+            </div>
+        </div>
+        <div class="container__options">
+            <div class="">
+                <h3 class="container__options__time__title">Session Length</h3>
+                <div class="container__options__time">
+                    <button class="container__options__time__inc">
+    
+                    </button>
+                    <time class="container__options__time__content">
+                        25 mins
+                    </time>
+                    <button class="container__options__time__dec">
+    
+                    </button>
+                </div>
+            </div>
+            <div class="">
+                <h3 class="container__options__break__title">Break Length</h3>
+                <div class="container__options__break">
+                    <button class="container__options__break__inc">
+    
+                    </button>
+                    <time class="container__options__break__content">
+                        5 mins
+                    </time>
+                    <button class="container__options__break__dec">
+    
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
