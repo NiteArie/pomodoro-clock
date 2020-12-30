@@ -67,6 +67,8 @@ const app = (() => {
             clearInterval(_breakInterval);
         }
 
+        updateDocumentTitle("Idle");
+
         setTimeValue(25);
         setSecondValue(0);
         setBreakValue(5);
@@ -106,7 +108,7 @@ const app = (() => {
         validTime();
 
         setCurrentOptionTime(_time);
-        
+
         if (_timerState) {
             renderTimeDisplay();
         }
@@ -239,6 +241,7 @@ const app = (() => {
             }
 
             renderTimeDisplay();
+            updateDocumentTitle(formatTimeAndSecond(_time, _second));
 
             if (_time === 0 && _second === 0) {
                 activeBreakState();
@@ -263,6 +266,7 @@ const app = (() => {
             }
 
             renderTimeDisplayWithBreak();
+            updateDocumentTitle(formatTimeAndSecond(_break, _second));
 
             if (_break === 0 && _second === 0) {
                 activeTimerState();
@@ -351,6 +355,10 @@ const app = (() => {
         } catch (error) {
             console.log("Audio autoplay error on Chrome. Audio works best on Firefox");
         }
+    }
+
+    function updateDocumentTitle(value) {
+        document.title = `${value} - Pomodoro Clock`;
     }
 
 })();
