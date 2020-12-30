@@ -94,8 +94,11 @@ const app = (() => {
 
         setCurrentOptionTime(_time);
 
-        renderTimeDisplay();
+        if (_timerState) {
+            renderTimeDisplay();
+        }
         renderOptionTimeDisplay();
+
     })
 
     _decrementTimeButton.addEventListener("click", event => {
@@ -103,8 +106,10 @@ const app = (() => {
         validTime();
 
         setCurrentOptionTime(_time);
-
-        renderTimeDisplay();
+        
+        if (_timerState) {
+            renderTimeDisplay();
+        }
         renderOptionTimeDisplay();
     })
 
@@ -238,6 +243,9 @@ const app = (() => {
             if (_time === 0 && _second === 0) {
                 activeBreakState();
                 clearInterval(_timerInterval);
+
+                playSessionEndAudio();
+
                 setSecondValue(0);
                 setBreakValue(_currentOptionBreak);
                 startBreakTimer();
@@ -259,6 +267,9 @@ const app = (() => {
             if (_break === 0 && _second === 0) {
                 activeTimerState();
                 clearInterval(_breakInterval);
+                
+                playBreakEndAudio();
+
                 setTimeValue(_currentOptionTime);
                 setSecondValue(0);
                 startTimer();
@@ -320,6 +331,26 @@ const app = (() => {
         _decrementBreakButton.disabled = false;
     }
 
+    function playSessionEndAudio() {
+        try {
+            let audio = document.createElement("audio");
+            audio.src = "assets/bell.mp3";
+    
+            audio.play();
+        } catch (error) {
+            console.log("Audio autoplay error on Chrome. Audio works best on Firefox");
+        }
+    }
 
+    function playBreakEndAudio() {
+        try {
+            let audio = document.createElement("audio");
+            audio.src = "assets/break.wav";
+
+            audio.play();
+        } catch (error) {
+            console.log("Audio autoplay error on Chrome. Audio works best on Firefox");
+        }
+    }
 
 })();
